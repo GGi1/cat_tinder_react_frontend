@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { FormControl } from 'react-bootstrap'
+import { Redirect } from 'react-router-dom'
 
 
 export default class NewCat extends Component {
@@ -23,41 +24,49 @@ handleChange(event){
 
 handleSubmit(event){
   event.preventDefault()
-  this.props.handleCat(this.state.form)
+  this.props.onSubmit(this.state.form)
+
 }
 
 
 render(){
   // console.log(this.props.handleSubmit);
   return(
-    <form>
-      <FormControl
-        type="text"
-        name="name"
-        placeholder = "name"
-        onChange={this.handleChange.bind(this)}
-        value={this.state.form.name}
-      />
-      <FormControl
-        type="number"
-        name="age"
-        placeholder = "age"
-        onChange={this.handleChange.bind(this)}
-        value={this.state.form.age}
-      />
-      <FormControl
-        type="text"
-        name="enjoys"
-        placeholder = "enjoys"
-        onChange={this.handleChange.bind(this)}
-        value={this.state.form.enjoys}
-      />
-      <FormControl
-        type="submit"
-        name="create cat"
-        onClick={this.handleSubmit.bind(this)}
-      />
-    </form>
+    <div>
+      <form>
+        <FormControl
+          type="text"
+          name="name"
+          placeholder = "name"
+          onChange={this.handleChange.bind(this)}
+          value={this.state.form.name}
+        />
+        <FormControl
+          type="number"
+          name="age"
+          placeholder = "age"
+          onChange={this.handleChange.bind(this)}
+          value={this.state.form.age}
+        />
+        <FormControl
+          type="text"
+          name="enjoys"
+          placeholder = "enjoys"
+          onChange={this.handleChange.bind(this)}
+          value={this.state.form.enjoys}
+        />
+        <FormControl
+          type="submit"
+          name="create cat"
+          onClick={this.handleSubmit.bind(this)}
+        />
+      </form>
+      {this.props.success &&
+             <Redirect to="/cats"/>
+         }
+
+  </div>
+
   )
 
 }
